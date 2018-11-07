@@ -23,15 +23,3 @@ class DHTValues(object):
                     count += 1
                     sleep(3)
         return {"temerature": temperature, "humidity": humidity}
-     
-    
-        '''if humidity and temperature:
-            return {"temerature": temperature, "humidity": humidity}
-        else:
-            count = 0
-            while not humidity and not temperature:
-                humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
-                sleep(3)
-                count += 1
-                if count > 15:
-                    raise Exception("Истёк лимит запросов, попробуйте позже.")'''
