@@ -4,4 +4,7 @@ from get_dht_values import DHTValues
 
 bot = TelegramBotHandler()
 dht = DHTValues()
-updated_results = bot.get_update()
+values = dht.get_temperature_and_humidity()
+updated_result = bot.get_update()
+chat_id = updated_result["message"]["chat"]["id"]
+bot.send_message(chat_id, str(values))
