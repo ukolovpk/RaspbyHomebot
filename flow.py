@@ -1,7 +1,6 @@
 from telegram_bot_handler import RaspbyBot
 import conf
 from get_dht_values import DHTValues
-import random
 
 
 bot = RaspbyBot()
@@ -15,5 +14,3 @@ if user_id in conf.dictionary["authorized users"]:
     bot.send_message(chat_id, text)
 else:
     bot.send_message(chat_id, "ты даже НЕ ГРАЖДАНИН!")
-
-
