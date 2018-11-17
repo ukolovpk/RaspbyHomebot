@@ -19,7 +19,7 @@ class TelegramBotHandler(object):
         if len(result) > 0:
             return result[len(result) - 1]
         else:
-            return result[0]
+            return None
 
     def send_message(self, chat_id, message):
         resp = SESSION.post(self.base_url + "/sendMessage", data={
