@@ -22,4 +22,4 @@ class DHTValues(object):
                 else:
                     count += 1
                     sleep(3)
-        return {"temerature": temperature, "humidity": humidity}
+        return {"temperature": temperature, "humidity": humidity}

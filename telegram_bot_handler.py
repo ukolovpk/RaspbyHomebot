@@ -27,3 +27,24 @@ class TelegramBotHandler(object):
         })
         print("Код ответа: " + str(resp.status_code) + "\n")
         return resp
+
+
+class RaspbyBot(TelegramBotHandler):
+
+    def __init__(self):
+        super(RaspbyBot, self).__init__()
+
+    def get_message(self, updated, dht):
+        if updated['message']['text'] == conf.GET_TEMPERATURE:
+            resp = "Сейчас в твоей квартире " + str(dht.get_temperature_and_humidity()["temperature"]) + " градусов по Цельсию"
+        elif updated['message']['text'] == conf.GET_HUMIDITY:
+            resp = "Сейчас в твоей квартире влажность воздуха составляет " + str(dht.get_temperature_and_humidity()["humidity"]) + " г/м³"
+        elif updated['message']['text'] == conf.GET_ALL:
+            resp = "Сейчас в твоей квартире " + str(dht.get_temperature_and_humidity()["temperature"]) + " градусов по Цельсию и " + str(dht.get_temperature_and_humidity()["humidity"]) + " г/м³ - влажности"
+        else:
+            resp = random.choice(["Босс, я не знаю такой команды",
+                                  "Повтори, что надо сделать?",
+                                  "Чё надо, хозяин?",
+                                  "К сожалению, я не понимаю...",
+                                  "Попробуй ещё раз"])
+        return resp
