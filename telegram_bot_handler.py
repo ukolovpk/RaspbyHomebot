@@ -1,5 +1,6 @@
 import requests
 import conf
+import random
 
 
 SESSION = requests.session()
