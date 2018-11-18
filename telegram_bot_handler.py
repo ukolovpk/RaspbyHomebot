@@ -36,11 +36,15 @@ class RaspbyBot(TelegramBotHandler):
         super(RaspbyBot, self).__init__()
 
     def get_message(self, updated, dht):
-        if updated['message']['text'] == conf.GET_TEMPERATURE:
+        try:
+            text = updated['message']['text']
+        except:
+            text = None
+        if text == conf.GET_TEMPERATURE:
             resp = "Сейчас в твоей квартире " + str(dht.get_temperature_and_humidity()["temperature"]) + " градусов по Цельсию"
-        elif updated['message']['text'] == conf.GET_HUMIDITY:
+        elif text == conf.GET_HUMIDITY:
             resp = "Сейчас в твоей квартире влажность воздуха составляет " + str(dht.get_temperature_and_humidity()["humidity"]) + " г/м³"
-        elif updated['message']['text'] == conf.GET_ALL:
+        elif text == conf.GET_ALL:
             resp = "Сейчас в твоей квартире " + str(dht.get_temperature_and_humidity()["temperature"]) + " градусов по Цельсию и " + str(dht.get_temperature_and_humidity()["humidity"]) + " г/м³ - влажности"
         else:
             resp = random.choice(["Босс, я не знаю такой команды",
