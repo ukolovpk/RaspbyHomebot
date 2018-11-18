@@ -17,7 +17,7 @@ class TelegramBotHandler(object):
         print("Код ответа: " + str(resp.status_code) + "\n")
         result = resp.json()["result"]
         if len(result) > 0:
-            return result[len(result) - 1]
+            return result
         else:
             return None
 
