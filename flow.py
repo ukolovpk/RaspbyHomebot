@@ -8,7 +8,10 @@ bot = RaspbyBot()
 dht = DHTValues()
 updated_result = bot.get_update()
 global last_update_id
-last_update_id = updated_result[len(updated_result) - 1]["update_id"]
+try:
+    last_update_id = updated_result[len(updated_result) - 1]["update_id"]
+except:
+    last_update_id = -1
 
 
 def auth_and_send(message_info):
@@ -25,13 +28,14 @@ def auth_and_send(message_info):
 
     global last_update_id
     last_update_id = update_id
-    sleep(2)
+    sleep(1)
 
 
 if __name__ == "__main__":
     while True:
+        timeout = bot.timeout
         updated_result = bot.get_update(offset=last_update_id + 1)
         if updated_result:
             for i in updated_result:
                 auth_and_send(i)
-        sleep(30)
+        sleep(timeout)

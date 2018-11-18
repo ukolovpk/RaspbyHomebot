@@ -34,6 +34,7 @@ class RaspbyBot(TelegramBotHandler):
 
     def __init__(self):
         super(RaspbyBot, self).__init__()
+        self.timeout = 7
 
     def get_message(self, updated, dht):
         try:
@@ -46,6 +47,12 @@ class RaspbyBot(TelegramBotHandler):
             resp = "Сейчас в твоей квартире влажность воздуха составляет " + str(dht.get_temperature_and_humidity()["humidity"]) + " г/м³"
         elif text == conf.GET_ALL:
             resp = "Сейчас в твоей квартире " + str(dht.get_temperature_and_humidity()["temperature"]) + " градусов по Цельсию и " + str(dht.get_temperature_and_humidity()["humidity"]) + " г/м³ - влажности"
+        elif text == conf.ENABLE_NIGHT_MODE:
+            resp = "Ночной режим включен. Доброй ночи!"
+            self.timeout = 120
+        elif text == conf.DISABLE_NIGHT_MODE:
+            resp = "Ну ты и соня!.. Тебя даже вчерашний шторм не разбудил..."
+            self.timeout = 7
         else:
             resp = random.choice(["Босс, я не знаю такой команды",
                                   "Повтори, что надо сделать?",
